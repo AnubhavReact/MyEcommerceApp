@@ -1,15 +1,16 @@
 const initialState = {
   token: true,
 };
+import {Login, LogOut} from './constants';
 
 const Reducers = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case Login:
       return {
         ...state,
         token: false,
       };
-    case 'LOGOUT':
+    case LogOut:
       return {
         ...state,
         token: true,

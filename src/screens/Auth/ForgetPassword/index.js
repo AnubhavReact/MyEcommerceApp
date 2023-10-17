@@ -37,27 +37,28 @@ const ForgetScreen = ({navigation}) => {
   };
 
   const onSubmit = async () => {
-    try {
-      const url = 'https://30c6-14-99-89-70.ngrok-free.app/sendMail';
-      const response = await fetch(url, {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({Email_id: value.email}),
-      });
-      const result = await response.json();
-      if (response.status == 200) {
-        Alert.alert('Otp Send Successfully');
-        navigation.navigate('OtpVerification');
-        setValue(prev => ({
-          ...prev,
-          email: '',
-        }));
-      } else {
-        Alert.alert(result.message);
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
+    navigation.navigate('OtpVerification');
+    // try {
+    //   const url = 'https://30c6-14-99-89-70.ngrok-free.app/sendMail';
+    //   const response = await fetch(url, {
+    //     method: 'post',
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: JSON.stringify({Email_id: value.email}),
+    //   });
+    //   const result = await response.json();
+    //   if (response.status == 200) {
+    //     Alert.alert('Otp Send Successfully');
+    //     navigation.navigate('OtpVerification');
+    //     setValue(prev => ({
+    //       ...prev,
+    //       email: '',
+    //     }));
+    //   } else {
+    //     Alert.alert(result.message);
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error.message);
+    // }
   };
 
   return (

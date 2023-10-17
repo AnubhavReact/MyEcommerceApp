@@ -1,5 +1,8 @@
 import {StyleSheet} from 'react-native';
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 const Style = StyleSheet.create({
   mainView: {
     height: '100%',
@@ -59,7 +62,7 @@ const Style = StyleSheet.create({
   },
   iconImage: {
     height: '50%',
-    width: '10%',
+    width: '9%',
     marginLeft: 10,
   },
   eyeView: {
@@ -78,7 +81,7 @@ const Style = StyleSheet.create({
     marginHorizontal: 15,
   },
   forgetText: {
-    fontSize: 20,
+    fontSize: hp(2),
     fontWeight: 'bold',
     color: 'cyan',
   },

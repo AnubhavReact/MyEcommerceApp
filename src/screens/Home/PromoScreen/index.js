@@ -2,14 +2,14 @@ import React from 'react';
 import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import Style from './style';
 
-const SearchScreen = () => {
+const PromoScreen = () => {
   return (
     <SafeAreaView style={Style.safeView}>
       <View style={Style.mainView}>
-        <Text>Search Screen</Text>
+        <Text>Promo Screen</Text>
       </View>
     </SafeAreaView>
-  );
+  );i
 };
 
-export default SearchScreen;
+export default PromoScreen;

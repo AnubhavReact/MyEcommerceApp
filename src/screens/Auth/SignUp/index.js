@@ -6,11 +6,17 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from 'react-native';
 import Style from './style';
 import constants from '../../../constants';
-import TextInputField  from '../../../components/textInput';
+import TextInputField from '../../../components/textInput';
 import utility from '../../../utility';
+import CountryDropDown from '../../../components/countryDropDown/index';
+import CheckBox from '@react-native-community/checkbox';
+import {useDispatch} from 'react-redux';
+import {GetSignUp} from '../../../components/redux/action';
+import NavigationService from '../../../navigation/NavigationService';
 
 const SignUp = ({navigation}) => {
   //State fot Get Input
@@ -24,6 +30,7 @@ const SignUp = ({navigation}) => {
     number: '',
     validPhone: false,
     validName: false,
+    termsAccepted: false,
   });
 
   // Function For Set Value
@@ -68,35 +75,34 @@ const SignUp = ({navigation}) => {
     }
   };
 
-  const onSubmit = async () => {
-    console.log(data.email);
-    console.log(data.password);
+  // Object To Store Data
+  const SignUpData = {
+    email: data.email,
+    password: data.password,
+    phoneNumber: data.number,
+    userName: data.name,
+  };
+
+  const dispatch = useDispatch();
+
+  //Funtion For Submit And Api
+  const onSubmit = () => {
+    console.log(SignUpData);
     if (data.validEmail == false && data.validPassword == false) {
-      try {
-        const url = 'https://a62c-14-99-89-70.ngrok-free.app/signup';
-        const response = await fetch(url, {
-          method: 'post',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            phoneNumber: data.number,
-            password: data.password,
-          }),
-        });
-        const result = await response.json();
-        if (result) {
-          if (response.status == 200) {
-            Alert.alert(result.msg);
-           // navigation.navigate('Login');
-          } else {
-            Alert.alert(result.msg);
-          }
-        }
-      } catch (error) {
-        console.log('Error');
-        console.error('Error:', error.msg);
-      }
+      dispatch(GetSignUp(SignUpData));
+      setData(prev => ({
+        ...prev,
+        email: '',
+        password: '',
+        seePassword: true,
+        validEmail: false,
+        validPassword: false,
+        name: '',
+        number: '',
+        validPhone: false,
+        validName: false,
+        termsAccepted: false,
+      }));
     } else {
       Alert.alert('Please Enter Valid Details');
     }
@@ -116,87 +122,111 @@ const SignUp = ({navigation}) => {
             </Text>
           </View>
           <View style={Style.dataView}>
-            {/* Its Email Input View */}
-            <View style={Style.inputView}>
-              <Image source={constants.icon.Person} style={Style.iconImage} />
-              {/* Its Name InputField View */}
-              <TextInputField
-                placeholder={constants.constant.Name}
-                value={data.name}
-                onChangeText={text => {
-                  onHandle('name', text);
-                  Validation('validName', text);
-                }}
-              />
-            </View>
-            {/* {data.validEmail ? (
-              <View style={Style.wrongTextView}>
-                <Text style={Style.wrongText}>Enter Valid Email</Text>
+            <ScrollView
+              style={Style.scrollView}
+              showsVerticalScrollIndicator={false}>
+              {/* Its Email Input View */}
+              <View style={Style.inputView}>
+                <Image source={constants.icon.Person} style={Style.iconImage} />
+                {/* Its Name InputField View */}
+                <TextInputField
+                  placeholder={constants.constant.Name}
+                  value={data.name}
+                  onChangeText={text => {
+                    onHandle('name', text);
+                    Validation('validName', text);
+                  }}
+                />
               </View>
-            ) : null} */}
-            <View style={Style.inputView}>
-              <Image source={constants.icon.Email} style={Style.iconImage} />
-              {/* Its Email InputField View */}
-              <TextInputField
-                placeholder={constants.constant.Email}
-                value={data.email}
-                onChangeText={text => {
-                  onHandle('email', text);
-                  Validation('validEmail', text);
-                }}
-              />
-            </View>
-            <View style={Style.inputView}>
-              <Image source={constants.icon.Phone} style={Style.iconImage} />
-              {/* Its Email InputField View */}
-              <TextInputField
-                placeholder={constants.constant.Phone}
-                value={data.number}
-                onChangeText={text => {
-                  onHandle('number', text);
-                  Validation('validPhone', text);
-                }}
-              />
-            </View>
-            {/* Its Password Input View */}
-            <View style={Style.inputView}>
-              <Image source={constants.icon.Lock} style={Style.iconImage} />
-              {/* Its Password InputField View */}
-              <TextInputField
-                placeholder={constants.constant.Password}
-                see={data.seePassword}
-                value={data.password}
-                onChangeText={text => {
-                  onHandle('password', text);
-                  Validation('validPassword', text);
-                }}
-              />
-              <TouchableOpacity
-                style={Style.eyeView}
-                onPress={() => onHandle('seePassword', !data.seePassword)}>
-                {data.seePassword ? (
-                  <Image source={constants.icon.Eye} style={Style.eyeImage} />
-                ) : (
-                  <Image
-                    source={constants.icon.EyeOff}
-                    style={Style.eyeImage}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-            {/* {data.validPassword ? (
-              <View style={Style.wrongPassView}>
-                <Text style={Style.wrongText}>Enter Valid Password</Text>
+              {data.validEmail && data.email ? (
+                <View style={Style.wrongTextView}>
+                  <Text style={Style.wrongText}>Enter Valid Email</Text>
+                </View>
+              ) : null}
+              <View style={Style.inputView}>
+                <Image source={constants.icon.Email} style={Style.iconImage} />
+                {/* Its Email InputField View */}
+                <TextInputField
+                  placeholder={constants.constant.Email}
+                  value={data.email}
+                  onChangeText={text => {
+                    onHandle('email', text);
+                    Validation('validEmail', text);
+                  }}
+                />
               </View>
-            ) : null} */}
+              <View style={Style.inputView}>
+                <Image source={constants.icon.Phone} style={Style.iconImage} />
+                {/* Its Email InputField View */}
+                <TextInputField
+                  placeholder={constants.constant.Phone}
+                  value={data.number}
+                  onChangeText={text => {
+                    onHandle('number', text);
+                    Validation('validPhone', text);
+                  }}
+                />
+              </View>
+              <CountryDropDown />
+              {/* Its Password Input View */}
+              <View style={Style.inputView}>
+                <Image source={constants.icon.Lock} style={Style.iconImage} />
+                {/* Its Password InputField View */}
+                <TextInputField
+                  placeholder={constants.constant.Password}
+                  see={data.seePassword}
+                  value={data.password}
+                  onChangeText={text => {
+                    onHandle('password', text);
+                    Validation('validPassword', text);
+                  }}
+                />
+                <TouchableOpacity
+                  style={Style.eyeView}
+                  onPress={() => onHandle('seePassword', !data.seePassword)}>
+                  {data.seePassword ? (
+                    <Image source={constants.icon.Eye} style={Style.eyeImage} />
+                  ) : (
+                    <Image
+                      source={constants.icon.EyeOff}
+                      style={Style.eyeImage}
+                    />
+                  )}
+                </TouchableOpacity>
+              </View>
+              {data.validPassword && data.password ? (
+                <View style={Style.wrongPassView}>
+                  <Text style={Style.wrongText}>Enter Valid Password</Text>
+                </View>
+              ) : null}
+              <View style={Style.checkboxContainer}>
+                <CheckBox
+                  value={data.termsAccepted}
+                  onValueChange={newValue =>
+                    setData(prev => ({
+                      ...prev,
+                      termsAccepted: newValue,
+                    }))
+                  }
+                  style={Style.checkbox}
+                  boxType="square"
+                />
+                <View style={Style.termView}>
+                  <Text numberOfLines={5} style={Style.checkboxLabel}>
+                    {constants.constant.TermCondition}
+                  </Text>
+                </View>
+              </View>
+            </ScrollView>
           </View>
           {/* Its Login View */}
           <View style={Style.loginView}>
-            {data.email && data.password && data.name && data.number ? (
+            {(data.email && data.password && data.name && data.number) ||
+            data.termsAccepted ? (
               <TouchableOpacity
                 style={Style.loginButtonView}
                 onPress={onSubmit}>
-                <Text style={Style.loginText}>{constants.constant.Sign}</Text>
+                <Text style={Style.loginText}>{constants.constant.SignUp}</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity style={Style.loginButtonView} disabled={true}>

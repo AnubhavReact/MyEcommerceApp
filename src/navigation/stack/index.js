@@ -1,3 +1,4 @@
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Main from '../tab';
@@ -7,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {LOGIN} from '../../components/redux/action';
 import {useState, useEffect} from 'react';
+import NavigationService from '../NavigationService';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,16 @@ const MainNavigation = () => {
   useEffect(() => {
     getName();
   }, []);
+
+  const navigationRef = React.createRef();
+
+  NavigationService.setTopLevelNavigator(navigationRef);
+
+  // useEffect(() => {
+  //   if (navigationRef.current) {
+  //     NavigationService.setTopLevelNavigator(navigationRef);
+  //   }
+  // }, [navigationRef.current, loadNavigation]);
 
   const onLoad = () => {
     dispatch(LOGIN());
@@ -58,7 +70,7 @@ const MainNavigation = () => {
       <ActivityIndicator size={'large'} color={'blue'} />
     </View>
   ) : (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName="Auth">
         {Value ? (
           <Stack.Screen

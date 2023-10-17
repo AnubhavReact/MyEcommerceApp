@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import Style from './style';
 import constants from '../../../constants';
 import TextInputField from '../../../components/textInput';
 import utility from '../../../utility';
 import {useDispatch} from 'react-redux';
-import {LOGIN} from '../../../components/redux/action';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {GetLogin} from '../../../components/redux/action';
+import NavigationService from '../../../navigation/NavigationService';
 
 const Login = ({navigation}) => {
   //State fot Get Input
@@ -29,6 +36,7 @@ const Login = ({navigation}) => {
   // Variable For Regex
   const reEmail = utility.regex.emailRegex;
   const rePass = utility.regex.passwordRegex;
+
   // Function For Regex
   const Validation = (item, value) => {
     if (item == 'validEmail') {
@@ -60,10 +68,28 @@ const Login = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  const onChange = async () => {
-    await AsyncStorage.setItem('token', 'false');
-    dispatch(LOGIN());
-    console.log('Successfully Login');
+  // Object To Store Data
+  const LoginData = {
+    email: data.email,
+    password: data.password,
+  };
+
+  const onSubmit = () => {
+    console.log(LoginData);
+    dispatch(GetLogin(LoginData));
+    // if (data.email != '' && data.password != '') {
+    //   dispatch(GetLogin(LoginData));
+    //   setData(prev => ({
+    //     ...prev,
+    //     email: '',
+    //     password: '',
+    //     seePassword: true,
+    //     validEmail: false,
+    //     validPassword: false,
+    //   }));
+    // } else {
+    //   Alert.alert('Please Enter Valid Details');
+    // }
   };
 
   return (
@@ -132,8 +158,9 @@ const Login = ({navigation}) => {
           {/* Its Login View */}
           <View style={Style.loginView}>
             {data.email || data.password ? (
-              <TouchableOpacity style={Style.loginButtonView}>
-                {/* onPress={() => onSubmit()} */}
+              <TouchableOpacity
+                style={Style.loginButtonView}
+                onPress={() => onSubmit()}>
                 <Text style={Style.loginText}>{constants.constant.Login}</Text>
               </TouchableOpacity>
             ) : (
@@ -146,7 +173,7 @@ const Login = ({navigation}) => {
         <View style={Style.thirdView}>
           <Text style={Style.dontText}>{constants.constant.Dont}</Text>
           {/* Its Create Account View */}
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <TouchableOpacity onPress={() => NavigationService.navigate('SignUp')}>
             <Text style={Style.createText}>{constants.constant.Create}</Text>
           </TouchableOpacity>
         </View>

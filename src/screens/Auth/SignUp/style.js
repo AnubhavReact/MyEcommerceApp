@@ -1,4 +1,9 @@
 import {StyleSheet} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import constants from '../../../constants';
 
 const Style = StyleSheet.create({
   mainView: {
@@ -17,8 +22,8 @@ const Style = StyleSheet.create({
     width: '10%',
   },
   secondView: {
-    flex: 0.6,
-    backgroundColor: 'white',
+    flex: 0.7,
+    backgroundColor: constants.appTheme.COLORS.white2,
     marginHorizontal: 20,
     marginVertical: 20,
     borderRadius: 15,
@@ -30,6 +35,7 @@ const Style = StyleSheet.create({
     flex: 0.2,
     justifyContent: 'center',
     marginHorizontal: 15,
+    //backgroundColor: 'red',
   },
   signText: {
     fontSize: 28,
@@ -37,8 +43,13 @@ const Style = StyleSheet.create({
     left: 10,
   },
   dataView: {
-    flex: 0.5,
-    justifyContent: 'center',
+    flex: 1,
+    //backgroundColor: 'yellow',
+    alignItems: 'center',
+  },
+  scrollView: {
+    flex: 1,
+    //backgroundColor: 'green',
   },
   wrongTextView: {
     height: 15,
@@ -56,16 +67,17 @@ const Style = StyleSheet.create({
     color: 'red',
   },
   inputView: {
-    height: '25%',
-    marginHorizontal: 15,
-    borderRadius: 10,
-    marginTop: 8,
+    height: hp(5),
+    //marginTop: 8,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: constants.appTheme.COLORS.white2,
+    width: wp(85),
+    marginVertical: hp(1),
   },
   iconImage: {
-    height: '50%',
-    width: '10%',
+    height: hp(3),
+    width: wp(7),
     marginLeft: 10,
   },
   eyeView: {
@@ -77,21 +89,12 @@ const Style = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  forgetView: {
-    height: '10%',
-    alignItems: 'flex-end',
-    marginHorizontal: 15,
-  },
-  forgetText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'cyan',
-  },
   loginView: {
     flex: 0.3,
     marginVertical: 5,
     marginHorizontal: 5,
     justifyContent: 'center',
+    //backgroundColor: 'blue',
   },
   loginButtonView: {
     height: '40%',
@@ -156,6 +159,29 @@ const Style = StyleSheet.create({
     width: '50%',
     tintColor: 'black',
   },
+  checkboxContainer: {
+    flexDirection: 'row',
+    height: hp(6),
+    alignItems: 'center',
+    width: wp(85),
+    marginVertical: hp(1),
+  },
+  checkbox: {
+    height: hp(3),
+    width: wp(7),
+    marginLeft: 10,
+    tintColor:'grey',
+  },
+  checkboxLabel:{
+    fontSize:hp(1.8),
+    fontWeight:'400'
+  },
+  termView:{
+     marginLeft:hp(1),
+     width:wp(75),
+     height:hp(6),
+     marginTop:hp(1),
+  }
 });
 
 export default Style;
