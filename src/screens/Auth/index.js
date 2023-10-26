@@ -3,12 +3,18 @@ import Login from './Login';
 import SignUp from './SignUp';
 import ForgetScreen from './ForgetPassword';
 import Verification from './OtpVeification';
+import WalkThrough from './walkthrough';
 
 const Stack = createStackNavigator();
 
 const Auth = () => {
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="WalkThrough">
+      <Stack.Screen
+        name="WalkThrough"
+        component={WalkThrough}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Login"
         component={Login}

@@ -13,10 +13,9 @@ import constants from '../../../constants';
 import TextInputField from '../../../components/textInput';
 import utility from '../../../utility';
 import CountryDropDown from '../../../components/countryDropDown/index';
-import CheckBox from '@react-native-community/checkbox';
 import {useDispatch} from 'react-redux';
 import {GetSignUp} from '../../../components/redux/action';
-import NavigationService from '../../../navigation/NavigationService';
+import CheckBox from '@react-native-community/checkbox';
 
 const SignUp = ({navigation}) => {
   //State fot Get Input

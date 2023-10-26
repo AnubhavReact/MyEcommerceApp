@@ -47,28 +47,27 @@ const Style = StyleSheet.create({
     //backgroundColor: 'yellow',
     alignItems: 'center',
   },
-  scrollView: {
-    flex: 1,
-    //backgroundColor: 'green',
-  },
+  // scrollView: {
+  //   flex: 1,
+  //   //backgroundColor: 'green',
+  // },
   wrongTextView: {
-    height: 15,
+    height: hp(2),
     alignItems: 'flex-end',
-    right: 10,
-  },
-  wrongPassView: {
-    height: 15,
-    alignItems: 'flex-end',
-    right: 10,
+    right: hp(1),
     //backgroundColor:'red'
   },
+  wrongPassView: {
+    height: hp(2),
+    alignItems: 'flex-end',
+    right: hp(1),
+  },
   wrongText: {
-    fontSize: 16,
+    fontSize: hp(1.7),
     color: 'red',
   },
   inputView: {
     height: hp(5),
-    //marginTop: 8,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: constants.appTheme.COLORS.white2,
@@ -126,42 +125,8 @@ const Style = StyleSheet.create({
     color: 'cyan',
     left: 10,
   },
-  fourView: {
-    flex: 0.3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  orView: {
-    flex: 0.2,
-    justifyContent: 'center',
-  },
-  orText: {
-    fontSize: 20,
-  },
-  socialIconView: {
-    flex: 0.3,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconView: {
-    height: '70%',
-    width: '15%',
-    backgroundColor: 'lightgrey',
-    borderWidth: 0.1,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 10,
-  },
-  socialImage: {
-    height: '60%',
-    width: '50%',
-    tintColor: 'black',
-  },
   checkboxContainer: {
     flexDirection: 'row',
-    height: hp(6),
     alignItems: 'center',
     width: wp(85),
     marginVertical: hp(1),
@@ -170,18 +135,19 @@ const Style = StyleSheet.create({
     height: hp(3),
     width: wp(7),
     marginLeft: 10,
-    tintColor:'grey',
+    tintColor: 'grey',
   },
-  checkboxLabel:{
-    fontSize:hp(1.8),
-    fontWeight:'400'
+  checkboxLabel: {
+    fontSize: hp(1.8),
+    fontWeight: '400',
   },
-  termView:{
-     marginLeft:hp(1),
-     width:wp(75),
-     height:hp(6),
-     marginTop:hp(1),
-  }
+  termView: {
+    marginLeft: hp(1),
+    flex: 1,
+    height: hp(6),
+    marginTop: hp(1),
+    backgroundColor: 'red',
+  },
 });
 
 export default Style;

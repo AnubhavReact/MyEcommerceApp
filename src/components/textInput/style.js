@@ -1,10 +1,14 @@
 import {StyleSheet} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Style = StyleSheet.create({
   textInput: {
-    height: '60%',
-    width: '70%',
-    fontSize: 18,
+    flex:1,
+    marginHorizontal:hp(1),
+    fontSize: hp(1.8),
     marginLeft: 10,
   },
 });

@@ -1,6 +1,7 @@
 import {TextInput} from 'react-native';
 import Style from './style';
 
+
 const TextInputField = props => {
   const {onChangeText, value} = props;
 

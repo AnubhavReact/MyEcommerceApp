@@ -6,6 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  Keyboard,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {decrement, increment} from '../../../components/reduxToolKit/slice';
@@ -28,27 +32,49 @@ const ToolKitScreen = () => {
 
   return (
     <SafeAreaView style={Style.safeView}>
-      <View style={Style.mainView}>
-        <View style={Style.headerView}>
-          <Text style={Style.headerText}>ToolKitScreen</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={Style.mainView}>
+          <View style={Style.headerView}>
+            <Text style={Style.headerText}>ToolKitScreen</Text>
+          </View>
+          <View style={Style.containerView}>
+            <TextInput
+              placeholder="Enter Any Value"
+              style={Style.inputStyle}
+              value={input}
+              keyboardAppearance="dark"
+              keyboardType="numeric"
+              onChangeText={text => setInput(text)}></TextInput>
+            <View style={{height: '20%', width: '100%'}}>
+              <ScrollView>
+                {Value.map(item => (
+                  <View
+                    key={item.id}
+                    style={{
+                      height: 40,
+                      marginTop: 5,
+                    }}
+                    onStartShouldSetResponder={() => true}>
+                    <Text key={item.id} style={Style.valueText}>
+                      {item.text}
+                    </Text>
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
+            <TouchableOpacity
+              style={Style.buttonView}
+              onPress={() => AddItem()}>
+              <Text style={Style.titleView}>Add Item</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={Style.buttonView}
+              onPress={() => RemoveItem()}>
+              <Text style={Style.titleView}>Remove Item</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={Style.containerView}>
-          <TextInput
-            placeholder="Enter Any Value"
-            style={Style.inputStyle}
-            value={input}
-            onChangeText={text => setInput(text)}></TextInput>
-          <Text style={Style.valueView}>{Value}</Text>
-          <TouchableOpacity style={Style.buttonView} onPress={() => AddItem()}>
-            <Text style={Style.titleView}>Add Item</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={Style.buttonView}
-            onPress={() => RemoveItem()}>
-            <Text style={Style.titleView}>Remove Item</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };
@@ -87,8 +113,13 @@ const Style = StyleSheet.create({
     paddingLeft: 9,
   },
   valueView: {
+    backgroundColor: 'pink',
+  },
+  valueText: {
     fontSize: 22,
     fontWeight: 'bold',
+    marginTop: 5,
+    textAlign: 'center',
   },
   buttonView: {
     backgroundColor: 'cyan',
@@ -102,5 +133,16 @@ const Style = StyleSheet.create({
     fontSize: 23,
     fontWeight: 'bold',
     color: 'white',
+  },
+  container: {
+    flex: 1,
+    // paddingTop: StatusBar.currentHeight,
+  },
+  scrollView: {
+    backgroundColor: 'pink',
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 42,
   },
 });

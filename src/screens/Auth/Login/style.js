@@ -54,11 +54,12 @@ const Style = StyleSheet.create({
   },
   inputView: {
     height: '25%',
-    marginHorizontal: 15,
+    marginHorizontal: hp(2),
     borderRadius: 10,
-    marginTop: 10,
+    marginTop: hp(1),
     flexDirection: 'row',
     alignItems: 'center',
+
   },
   iconImage: {
     height: '50%',
@@ -68,7 +69,7 @@ const Style = StyleSheet.create({
   eyeView: {
     height: '60%',
     width: '10%',
-    marginLeft: 5,
+    right: hp(1),
   },
   eyeImage: {
     height: '100%',

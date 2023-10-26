@@ -29,6 +29,11 @@ const Search = require('../assests/icon/search.png');
 const ShoppingBag = require('../assests/icon/shopping_bag.png');
 const ShoppingCart = require('../assests/icon/shopping-cart.png');
 const Video = require('../assests/icon/video.png');
+const Fav = require('../assests/icon/love.png');
+const Plus = require('../assests/icon/plus-2.png');
+const Minus = require('../assests/icon/minus.png');
+const Delete = require('../assests/icon/delete.png');
+const ForwardIcon = require('../assests/icon/rightForward.png');
 
 export default {
   Email,
@@ -62,4 +67,9 @@ export default {
   ShoppingBag,
   ShoppingCart,
   Video,
+  Fav,
+  Plus,
+  Minus,
+  Delete,
+  ForwardIcon,
 };
