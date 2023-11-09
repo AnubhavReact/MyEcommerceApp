@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { Install } from '../../../components/redux/action';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const WalkThrough = () => {
   const [value, setValue] = useState(0);
   const [score, setScore] = useState(0);
