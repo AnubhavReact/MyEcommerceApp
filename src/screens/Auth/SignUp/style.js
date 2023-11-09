@@ -4,6 +4,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import constants from '../../../constants';
+import { hpx } from '../../../utility/metrics';
 
 const Style = StyleSheet.create({
   mainView: {
@@ -44,18 +45,12 @@ const Style = StyleSheet.create({
   },
   dataView: {
     flex: 1,
-    //backgroundColor: 'yellow',
     alignItems: 'center',
   },
-  // scrollView: {
-  //   flex: 1,
-  //   //backgroundColor: 'green',
-  // },
   wrongTextView: {
     height: hp(2),
     alignItems: 'flex-end',
     right: hp(1),
-    //backgroundColor:'red'
   },
   wrongPassView: {
     height: hp(2),
@@ -93,7 +88,6 @@ const Style = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
     justifyContent: 'center',
-    //backgroundColor: 'blue',
   },
   loginButtonView: {
     height: '40%',
@@ -138,15 +132,15 @@ const Style = StyleSheet.create({
     tintColor: 'grey',
   },
   checkboxLabel: {
-    fontSize: hp(1.8),
+    fontSize: hpx(14),
     fontWeight: '400',
   },
   termView: {
     marginLeft: hp(1),
     flex: 1,
     height: hp(6),
-    marginTop: hp(1),
-    backgroundColor: 'red',
+    alignItems:'center',
+    justifyContent:'center'
   },
 });
 

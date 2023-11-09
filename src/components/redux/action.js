@@ -1,4 +1,4 @@
-import {onLogin, onSignUp, onOtp, onGetData, Login, LogOut} from './constants';
+import {onLogin, onSignUp, onOtp, onGetData, Login, LogOut,inInstall} from './constants';
 
 export const LOGIN = () => {
   return {
@@ -30,5 +30,10 @@ export const GetOtp = () => {
 export const GetData = () => {
   return {
     type: onGetData,
+  };
+};
+export const Install = () => {
+  return {
+    type: inInstall,
   };
 };
